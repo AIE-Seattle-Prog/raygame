@@ -9,7 +9,13 @@
 *
 ********************************************************************************************/
 
+#include <iostream>
+#include <string>
+
 #include "raylib.h"
+
+#include "player.h"
+#include "pickup.h"
 
 int main()
 {
@@ -21,14 +27,44 @@ int main()
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
 	SetTargetFPS(60);
-	//--------------------------------------------------------------------------------------
+
+    std::cout << "Welcome to Move-a-Ball" << std::endl;
+
+    player ball;
+    ball.position = { 100, 100 };
+    ball.speed = 10.0f;
+    ball.score = 0;
+    ball.texture = LoadTexture("res\\player.png");
+
+    const int PICKUP_COUNT = 4;
+    Texture2D pickupTex = LoadTexture("res\\coin.png");
+    pickup pickups[PICKUP_COUNT] =
+    {
+        {true, 200, 225, 1, pickupTex},
+        {true, 400, 225, 1, pickupTex},
+        {true, 600, 225, 1, pickupTex},
+        {true, 400, 325, 1, pickupTex}
+    };
+
+    //--------------------------------------------------------------------------------------
 
 	// Main game loop
 	while (!WindowShouldClose())    // Detect window close button or ESC key
 	{
 		// Update
 		//----------------------------------------------------------------------------------
-		// TODO: Update your variables here
+        ball.update();
+        for (int i = 0; i < PICKUP_COUNT; ++i)
+        {
+            if (!pickups[i].enabled) { continue; }
+
+            // has the player collided with a pickup?
+            if (CheckCollisionRecs(ball.getCollider(), pickups[i].getCollider()))
+            {
+                pickups[i].enabled = false;
+                ball.score++;
+            }
+        }
 		//----------------------------------------------------------------------------------
 
 		// Draw
@@ -37,14 +73,23 @@ int main()
 
 		ClearBackground(RAYWHITE);
 
-		DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+        ball.draw();
+        for (int i = 0; i < PICKUP_COUNT; ++i)
+        {
+            pickups[i].draw();
+        }
 
+        DrawText(std::to_string(ball.score).c_str(), 64, 64, 32, GRAY);
 		EndDrawing();
 		//----------------------------------------------------------------------------------
 	}
 
 	// De-Initialization
 	//--------------------------------------------------------------------------------------   
+
+    UnloadTexture(ball.texture);
+    UnloadTexture(pickupTex);
+
 	CloseWindow();        // Close window and OpenGL context
 	//--------------------------------------------------------------------------------------
 
