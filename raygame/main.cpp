@@ -9,14 +9,19 @@
 *
 ********************************************************************************************/
 
+#include "tools.h"
 #include "raylib.h"
+#include "test/test.h"
+// should this path be relative?
 
 int main()
 {
 	// Initialization
 	//--------------------------------------------------------------------------------------
 	int screenWidth = 800;
-	int screenHeight = 450;
+	int screenHeight = sum(450, 50);
+
+	yo();
 
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
