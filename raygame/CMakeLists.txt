@@ -4,6 +4,8 @@ project(maingame)
 add_executable(maingame
     main.cpp
     tools.cpp
+    tri.cpp
+    gamestate.cpp
     )
 
 target_link_libraries(maingame raylib)

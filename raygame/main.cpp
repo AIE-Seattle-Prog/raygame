@@ -9,40 +9,46 @@
 *
 ********************************************************************************************/
 
-#include "tools.h"
 #include "raylib.h"
+#include "splashstate.h"
 
 int main()
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    int screenWidth = 800;
-    int screenHeight = sum(450, 50);
-
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
+    InitWindow(320, 240, "terryware");
     SetTargetFPS(60);
-    //--------------------------------------------------------------------------------------
+
+    gamestate * stateInstance = new splashstate();
+    GameStates currentState = SPLASH;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
         // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
+        stateInstance->tick(GetFrameTime());
+        GameStates nextState = stateInstance->next();
+        if(nextState != currentState)
+        {
+            delete stateInstance;
+
+            setupGameState(stateInstance, nextState);
+            currentState = nextState;
+            continue;
+        }
 
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-
         ClearBackground(RAYWHITE);
 
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+        stateInstance->draw();
 
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
+
+    delete stateInstance;
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
