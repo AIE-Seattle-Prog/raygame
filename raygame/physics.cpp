@@ -47,5 +47,5 @@ void physObject::addImpulse(glm::vec2 impulse)
 
 void physObject::addVelocityChange(glm::vec2 delta)
 {
-	vel = delta;
+	vel += delta;
 }

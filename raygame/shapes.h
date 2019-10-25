@@ -22,3 +22,9 @@ bool checkCircleAABB(glm::vec2 posA, circle circ, glm::vec2 posB, aabb ab);
 
 bool checkCircleX(glm::vec2 posA, circle lhs, glm::vec2 posB, shape rhs);
 bool checkAABBX(glm::vec2 posA, aabb lhs, glm::vec2 posB, shape rhs);
+
+void resolvePhysBodies(class physObject& lhs, class physObject& rhs);
+
+void resolveCollision(glm::vec2 posA, glm::vec2 velA, float massA,
+					  glm::vec2 posB, glm::vec2 velB, float massB,
+				      float elasticity, glm::vec2 normal, glm::vec2* dst);

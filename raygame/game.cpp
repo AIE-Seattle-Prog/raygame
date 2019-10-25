@@ -3,10 +3,16 @@
 #include "raylib.h"
 #include <iostream>
 
+float wrap(float value, float limit)
+{
+	return fmodf(fmodf(value, limit) + limit, limit);
+}
+
 game::game()
 {
 	targetFixedStep = 1.0f / 30.0f;
 	accumulatedFixedTime = 0.0f;
+	physicsScale = 1.0f;
 }
 
 void game::init()
@@ -47,6 +53,8 @@ void game::tick()
 		{
 			babyPhys.collider = aabb{ {15, 15} };
 		}
+
+		babyPhys.addImpulse({ 0, 50 });
 	}
 }
 
@@ -58,7 +66,11 @@ void game::tickPhys()
 	//std::cout << "PHYS TICK" << std::endl;
 	for (auto& i : physObjects)
 	{
+		i.addAccel(glm::vec2{ 0, 9.8f } * physicsScale);
 		i.tickPhys(targetFixedStep);
+
+		i.pos.x = wrap(i.pos.x, (float)GetScreenWidth());
+		i.pos.y = wrap(i.pos.y, (float)GetScreenHeight());
 	}
 
 	for (auto &i : physObjects)
@@ -68,8 +80,12 @@ void game::tickPhys()
 			// skip self collision
 			if (&i == &j) { continue; }
 
-			i.collider.match([i, j](circle c) { if (checkCircleX(i.pos, c, j.pos, j.collider)) { std::cout << "collision!" << std::endl; } },
-              				 [i, j](aabb a) { if (checkAABBX(i.pos, a, j.pos, j.collider)) { std::cout << "colllllllision." << std::endl; }});
+			bool collision = false;
+
+			i.collider.match([i, j, &collision](circle c) { if (checkCircleX(i.pos, c, j.pos, j.collider)) { collision = true; } },
+              				 [i, j, &collision](aabb a)   { if (checkAABBX(i.pos, a, j.pos, j.collider)) { collision = true; }});
+
+			if (collision) { resolvePhysBodies(i, j); }
 		}
 	}
 }

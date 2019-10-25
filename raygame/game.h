@@ -23,4 +23,5 @@ public:
 	bool shouldPhysics() const;
 
 	float targetFixedStep;
+	float physicsScale;
 };

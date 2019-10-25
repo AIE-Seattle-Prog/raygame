@@ -7,6 +7,7 @@ int main()
 	game app;
 	app.init();
 	app.targetFixedStep = 1.0f / 30.0f; // target physics tick rate
+	app.physicsScale = 20.f;
 
 	while (!app.shouldClose())
 	{
