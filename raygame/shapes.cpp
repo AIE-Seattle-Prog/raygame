@@ -68,8 +68,6 @@ void resolvePhysBodies(physObject& lhs, physObject& rhs)
 	rhs.vel = resImpulses[1];
 }
 
-#include <iostream>
-
 void resolveCollision(glm::vec2 posA, glm::vec2 velA, float massA,
 	                  glm::vec2 posB, glm::vec2 velB, float massB,
 	                  float elasticity, glm::vec2 normal, glm::vec2 * dst)
@@ -77,8 +75,6 @@ void resolveCollision(glm::vec2 posA, glm::vec2 velA, float massA,
 	glm::vec2 relVel = velA - velB;
 	float impulseMag = glm::dot(-(1.0f + elasticity) * relVel, normal) /
 					   glm::dot(normal, normal * (1 / massA + 1 / massB));
-
-	std::cout << impulseMag << std::endl;
 
 	dst[0] = velA + (impulseMag / massA) * normal;
 	dst[1] = velB - (impulseMag / massB) * normal;
