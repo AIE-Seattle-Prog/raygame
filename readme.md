@@ -1,11 +1,11 @@
 # raygame - sample project
 
-This is a sample C++ project setup with [raylib][raylib] for Visual
-Studio 2019. Raylib is a simple game programming framework that is designed to
+This is a sample C++ project setup with [raylib][raylib] for **Visual
+Studio 2022**. Raylib is a simple game programming framework that is designed to
 be friendly to beginners. It is created by [Ramon Santamaria
 (@raysan5)][raysan].
 
-This version is compatible with any documentation referring to Raylib 3.0.
+This version is compatible with any documentation referring to Raylib 5.0.
 
 It is primarily intended for use by students in the Game Programming course at
 the Seattle Campus of the Academy of Interactive Entertainment.
@@ -20,30 +20,29 @@ up top to copy this repository to your own account. Then, follow the
 instructions in the [Building](#building) section below.
 
 Once you've got it working, check out the cheatsheet for more information on
-the Raylib API or browse the example projects.
+the Raylib API or browse the example projects. If using the object-oriented
+wrapper for raylib, refer to its [repository][rl-cpp-repo].
 
 **raylib links** - [website][rl-website] / [discord][rl-discord] / [reddit][rl-reddit] / [raylib repo][rl-repo] / [api reference][rl-cheatsheet], [examples][rl-examples]
 
 [rl-website]:https://www.raylib.com/
 [rl-discord]:https://discord.gg/VkzNHUE
 [rl-reddit]:https://www.reddit.com/r/raylib/
-[rl-repo]:https://github.com/raysan5/raylib/tree/3.0.0
+[rl-repo]:https://github.com/raysan5/raylib/releases/tag/5.0
 [rl-cheatsheet]:https://www.raylib.com/cheatsheet/cheatsheet.html
 [rl-examples]:https://www.raylib.com/examples.html
-[rl-examples-repo]:https://github.com/raysan5/raylib/tree/3.0.0/examples
-[rl-cs-bindings]:https://github.com/ChrisDill/Raylib-cs
-[rl-cs-bindings-ref]:https://github.com/ChrisDill/Raylib-cs/blob/master/Raylib-cs/Raylib.cs
-[rl-cs-examples]:https://github.com/ChrisDill/Raylib-cs-Examples
+[rl-examples-repo]:https://github.com/raysan5/raylib/tree/5.0.0/examples
+[rl-cpp-repo]:https://github.com/RobLoach/raylib-cpp
 
 ## Building
 
-This project supports by **Visual Studio 2019** or newer.
+This project supports by **Visual Studio 2022** or newer.
 
 > **Property**          | **Value**
 > ----------------------|--------------------------------
 > Windows SDK Version   | 10.0 (latest installed version)
-> Platform Toolset      | Visual Studio 2019 (v142)
-> C++ Language Standard | ISO C++14 Standard (std:c++14)
+> Platform Toolset      | Visual Studio 2022 (v143)
+> C++ Language Standard | ISO C++20 Standard (std:c++20)
 
 When building, please make sure that your installation of Visual Studio has
 the necessary components to compile this project, per the table above. If
@@ -68,9 +67,16 @@ available through raylib.
 [basicexample]:https://github.com/raysan5/raylib/tree/3.0.0/examples/core/core_basic_window.cpp
 [rayexamplesite]:https://www.raylib.com/examples.html
 
+### Raylib
+
+Raylib is now integrated using the C++ NuGet package instead of maintaining
+copies of its header and binaries in the thirdparty folder. Visual Studio should
+check and resolve it as a dependency if the necessary files have not yet been
+downloaded.
+
 ## License
 
-MIT License - Copyright (c) 2018-2020 Academy of Interactive Entertainment
+MIT License - Copyright (c) 2018-2020, 2024 Academy of Interactive Entertainment
 
 For more information, see the [license][lic] file.
 

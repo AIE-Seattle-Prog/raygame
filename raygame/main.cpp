@@ -9,16 +9,16 @@
 *
 ********************************************************************************************/
 
-#include "raylib.h"
+#include "raylib.hpp"
 
 int main()
 {
 	// Initialization
 	//--------------------------------------------------------------------------------------
-	int screenWidth = 800;
-	int screenHeight = 450;
+	int ScreenWidth = 800;
+	int ScreenHeight = 450;
 
-	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+	InitWindow(ScreenWidth, ScreenHeight, "raylib [core] example - basic window");
 
 	SetTargetFPS(60);
 	//--------------------------------------------------------------------------------------

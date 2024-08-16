@@ -1,0 +1,8 @@
+* text=auto
+
+*.bat   text eol=crlf
+*.sh	text eol=lf
+
+*.sln encoding=utf-8
+*.vcxproj encoding=utf-8
+*.vcxproj.filters encoding=utf-8
